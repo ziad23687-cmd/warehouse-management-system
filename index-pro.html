@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة مخزن عين شمس - مدير الحسابات</title>
+    <link rel="stylesheet" href="styles-pro.css">
+</head>
+<body>
+    <!-- خلفية الشبكة البرمجية المتحركة -->
+    <div class="animated-background">
+        <div class="network-grid"></div>
+        <div class="floating-particles"></div>
+    </div>
+
+    <!-- صفحة تسجيل الدخول -->
+    <div id="loginPage" class="page-container active">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="logo-circle">
+                        <span class="logo-icon">🏭</span>
+                    </div>
+                    <h1>مخزن عين شمس</h1>
+                    <p class="subtitle">نظام إدارة الحسابات المتقدم</p>
+                </div>
+
+                <form class="login-form" onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="username" 
+                            placeholder="اسم المستخدم" 
+                            required
+                            class="input-field"
+                        >
+                        <span class="input-icon">👤</span>
+                    </div>
+
+                    <div class="input-group">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            placeholder="كلمة المرور" 
+                            required
+                            class="input-field"
+                        >
+                        <span class="input-icon">🔐</span>
+                    </div>
+
+                    <button type="submit" class="login-btn">
+                        <span>دخول النظام</span>
+                        <span class="btn-icon">➔</span>
+                    </button>
+                </form>
+
+                <div class="login-footer">
+                    <p>نظام متخصص لإدارة المخازن والمبيعات</p>
+                </div>
+            </div>
+
+            <div class="login-side-info">
+                <h2>مميزات النظام</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">📦</span>
+                        <span>إدارة متقدمة للأصناف</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💰</span>
+                        <span>فواتير بيع واحترافية</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📊</span>
+                        <span>تقارير وإحصائيات دقيقة</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🔒</span>
+                        <span>أمان عالي للبيانات</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="mainPage" class="page-container">
+        <!-- شريط التنقل العلوي -->
+        <header class="top-navbar">
+            <div class="navbar-left">
+                <div class="brand">
+                    <span class="brand-icon">🏭</span>
+                    <div class="brand-text">
+                        <h2>مخزن عين شمس</h2>
+                        <p>نظام إدارة الحسابات</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-right">
+                <div class="user-info">
+                    <span class="user-name" id="userName">المستخدم</span>
+                    <span class="user-role">مدير الحسابات</span>
+                </div>
+                <button class="logout-btn" onclick="handleLogout()">
+                    <span>🚪</span>
+                    <span>تسجيل خروج</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="main-wrapper">
+            <!-- القائمة الجانبية -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <div class="nav-section">
+                        <h3 class="nav-title">القائمة الرئيسية</h3>
+                        
+                        <div class="nav-item" onclick="showPage('dashboard')">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">لوحة التحكم</span>
+                            <span class="nav-indicator"></span>
+                        </div>
+
+                        <div class="nav-item" onclick="showPage('products')">
+                            <span class="nav-icon">🏷️</span>
+                            <span class="nav-text">الأصناف والمنتجات</span>
+                            <span class="nav-indicator"></span>
+                        </div>
+
+                        <div class="nav-item" onclick="showPage('customers')">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">العملاء</span>
+                            <span class="nav-indicator"></span>
+                        </div>
+                    </div>
+
+                    <div class="nav-section">
+                        <h3 class="nav-title">الفواتير والعمليات</h3>
+
+                        <div class="nav-item" onclick="showPage('sales')">
+                            <span class="nav-icon">💰</span>
+                            <span class="nav-text">فواتير البيع</span>
+                            <span class="nav-indicator"></span>
+                        </div>
+
+                        <div class="nav-item" onclick="showPage('purchases')">
+                            <span class="nav-icon">📦</span>
+                            <span class="nav-text">فواتير الشراء</span>
+                            <span class="nav-indicator"></span>
+                        </div>
+                    </div>
+
+                    <div class="nav-section">
+                        <h3 class="nav-title">التقارير والإعدادات</h3>
+
+                        <div class="nav-item" onclick="showPage('reports')">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-text">التقارير المتقدمة</span>
+                            <span class="nav-indicator"></span>
+                        </div>
+
+                        <div class="nav-item" onclick="showPage('settings')">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">الإعدادات</span>
+                            <span class="nav-indicator"></span>
+                        </div>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- المحتوى الرئيسي -->
+            <main class="main-content">
+                <!-- لوحة التحكم -->
+                <div id="dashboard" class="content-page active">
+                    <div class="page-header">
+                        <h1>لوحة التحكم</h1>
+                        <p class="page-subtitle">نظرة عامة على أداء النظام</p>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-icon icon-products">📦</span>
+                                <span class="stat-label">الأصناف</span>
+                            </div>
+                            <div class="stat-value" id="totalProducts">0</div>
+                            <div class="stat-footer">المنتجات المسجلة</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-icon icon-customers">👥</span>
+                                <span class="stat-label">العملاء</span>
+                            </div>
+                            <div class="stat-value" id="totalCustomers">0</div>
+                            <div class="stat-footer">عملاء مسجلين</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-icon icon-sales">💵</span>
+                                <span class="stat-label">المبيعات</span>
+                            </div>
+                            <div class="stat-value" id="totalSales">0</div>
+                            <div class="stat-footer">إجمالي المبيعات</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-icon icon-purchases">📊</span>
+                                <span class="stat-label">المشتريات</span>
+                            </div>
+                            <div class="stat-value" id="totalPurchases">0</div>
+                            <div class="stat-footer">إجمالي المشتريات</div>
+                        </div>
+                    </div>
+
+                    <div class="charts-section">
+                        <div class="chart-card">
+                            <h3>الحركة المالية الأخيرة</h3>
+                            <div class="simple-chart" id="recentActivity">
+                                <p class="empty-state">لا توجد حركات مالية حتى الآن</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الأصناف -->
+                <div id="products" class="content-page">
+                    <div class="page-header">
+                        <h1>إدارة الأصناف والمنتجات</h1>
+                        <button class="btn-primary" onclick="openProductModal()">
+                            <span>➕</span> إضافة صنف جديد
+                        </button>
+                    </div>
+
+                    <div class="content-card">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>الكود</th>
+                                    <th>اسم الصنف</th>
+                                    <th>النوع</th>
+                                    <th>السعر (جنيه)</th>
+                                    <th>الكمية</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTable">
+                                <tr class="empty-row">
+                                    <td colspan="6">لا توجد أصناف مسجلة حتى الآن</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- العملاء -->
+                <div id="customers" class="content-page">
+                    <div class="page-header">
+                        <h1>إدارة العملاء</h1>
+                        <button class="btn-primary" onclick="openCustomerModal()">
+                            <span>➕</span> إضافة عميل جديد
+                        </button>
+                    </div>
+
+                    <div class="content-card">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>الكود</th>
+                                    <th>اسم العميل</th>
+                                    <th>الهاتف</th>
+                                    <th>العنوان</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customersTable">
+                                <tr class="empty-row">
+                                    <td colspan="5">لا توجد عملاء مسجلين حتى الآن</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- فواتير البيع -->
+                <div id="sales" class="content-page">
+                    <div class="page-header">
+                        <h1>فواتير البيع</h1>
+                        <button class="btn-primary" onclick="openSalesInvoiceModal()">
+                            <span>➕</span> فاتورة بيع جديدة
+                        </button>
+                    </div>
+
+                    <div class="content-card">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم الفاتورة</th>
+                                    <th>التاريخ</th>
+                                    <th>العميل</th>
+                                    <th>الإجمالي (جنيه)</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="salesTable">
+                                <tr class="empty-row">
+                                    <td colspan="5">لا توجد فواتير بيع حتى الآن</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- فواتير الشراء -->
+                <div id="purchases" class="content-page">
+                    <div class="page-header">
+                        <h1>فواتير الشراء</h1>
+                        <button class="btn-primary" onclick="openPurchasesInvoiceModal()">
+                            <span>➕</span> فاتورة شراء جديدة
+                        </button>
+                    </div>
+
+                    <div class="content-card">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم الفاتورة</th>
+                                    <th>التاريخ</th>
+                                    <th>المورد</th>
+                                    <th>الإجمالي (جنيه)</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="purchasesTable">
+                                <tr class="empty-row">
+                                    <td colspan="5">لا توجد فواتير شراء حتى الآن</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- التقارير -->
+                <div id="reports" class="content-page">
+                    <div class="page-header">
+                        <h1>التقارير المتقدمة</h1>
+                        <p class="page-subtitle">تحليل شامل للحركات المالية والمخزون</p>
+                    </div>
+
+                    <div class="reports-grid">
+                        <div class="report-card">
+                            <div class="report-icon">📊</div>
+                            <h3>تقرير المبيعات</h3>
+                            <p>عرض تفصيلي لجميع عمليات البيع</p>
+                            <button class="btn-secondary" onclick="generateSalesReport()">عرض التقرير</button>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-icon">📦</div>
+                            <h3>تقرير المشتريات</h3>
+                            <p>تتبع جميع عمليات الشراء</p>
+                            <button class="btn-secondary" onclick="generatePurchasesReport()">عرض التقرير</button>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-icon">📈</div>
+                            <h3>تقرير المخزون</h3>
+                            <p>حالة المخزون الحالية والأصناف</p>
+                            <button class="btn-secondary" onclick="generateInventoryReport()">عرض التقرير</button>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-icon">👥</div>
+                            <h3>تقرير العملاء</h3>
+                            <p>قائمة شاملة للعملاء والمبيعات</p>
+                            <button class="btn-secondary" onclick="generateCustomersReport()">عرض التقرير</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الإعدادات -->
+                <div id="settings" class="content-page">
+                    <div class="page-header">
+                        <h1>الإعدادات والنسخ الاحتياطي</h1>
+                    </div>
+
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h3>📋 بيانات المتجر</h3>
+                            <div class="form-group">
+                                <label>اسم المتجر:</label>
+                                <input type="text" id="storeName" class="input-field" value="مخزن عين شمس">
+                            </div>
+                            <div class="form-group">
+                                <label>العنوان:</label>
+                                <input type="text" id="storeAddress" class="input-field">
+                            </div>
+                            <div class="form-group">
+                                <label>الهاتف:</label>
+                                <input type="tel" id="storePhone" class="input-field">
+                            </div>
+                            <div class="form-group">
+                                <label>البريد الإلكتروني:</label>
+                                <input type="email" id="storeEmail" class="input-field">
+                            </div>
+                            <button class="btn-success" onclick="saveSettings()">💾 حفظ الإعدادات</button>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>💾 النسخ الاحتياطي</h3>
+                            <p class="setting-description">قم بحفظ نسخة من البيانات بأمان</p>
+                            <button class="btn-warning" onclick="backupData()">⬇️ تحميل نسخة احتياطية</button>
+                            <button class="btn-info" onclick="restoreData()">⬆️ استرجاع من نسخة</button>
+                        </div>
+
+                        <div class="settings-card danger">
+                            <h3>🗑️ حذف البيانات</h3>
+                            <p class="setting-description warning">تحذير: هذا الإجراء لا يمكن التراجع عنه!</p>
+                            <button class="btn-danger" onclick="clearAllData()">حذف جميع البيانات</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- النوافذ المنبثقة -->
+    <!-- نافذة إضافة صنف -->
+    <div id="productModal" class="modal">
+        <div class="modal-overlay" onclick="closeProductModal()"></div>
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h2>إضافة صنف جديد</h2>
+                <button class="modal-close" onclick="closeProductModal()">✕</button>
+            </div>
+            <form class="modal-form" onsubmit="saveProduct(event)">
+                <div class="form-group">
+                    <label>اسم الصنف:</label>
+                    <input type="text" id="productName" required class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>النوع:</label>
+                    <input type="text" id="productType" class="input-field" placeholder="مثال: ماكينة خياطة يدوية">
+                </div>
+                <div class="form-group">
+                    <label>السعر (جنيه):</label>
+                    <input type="number" id="productPrice" step="0.01" required class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>الكمية:</label>
+                    <input type="number" id="productQuantity" required class="input-field">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">حفظ الصنف</button>
+                    <button type="button" class="btn-secondary" onclick="closeProductModal()">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة عميل -->
+    <div id="customerModal" class="modal">
+        <div class="modal-overlay" onclick="closeCustomerModal()"></div>
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h2>إضافة عميل جديد</h2>
+                <button class="modal-close" onclick="closeCustomerModal()">✕</button>
+            </div>
+            <form class="modal-form" onsubmit="saveCustomer(event)">
+                <div class="form-group">
+                    <label>اسم العميل:</label>
+                    <input type="text" id="customerName" required class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>الهاتف:</label>
+                    <input type="tel" id="customerPhone" class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>العنوان:</label>
+                    <input type="text" id="customerAddress" class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني:</label>
+                    <input type="email" id="customerEmail" class="input-field">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">حفظ العميل</button>
+                    <button type="button" class="btn-secondary" onclick="closeCustomerModal()">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة فاتورة البيع -->
+    <div id="salesInvoiceModal" class="modal">
+        <div class="modal-overlay" onclick="closeSalesInvoiceModal()"></div>
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h2>إنشاء فاتورة بيع</h2>
+                <button class="modal-close" onclick="closeSalesInvoiceModal()">✕</button>
+            </div>
+            <form class="modal-form" onsubmit="saveSalesInvoice(event)">
+                <div class="form-group">
+                    <label>اختر العميل:</label>
+                    <select id="salesCustomer" required class="input-field">
+                        <option value="">-- اختر عميل --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>اختر الصنف:</label>
+                    <select id="salesProduct" required class="input-field">
+                        <option value="">-- اختر صنف --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>الكمية:</label>
+                    <input type="number" id="salesQuantity" required class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>السعر الإجمالي:</label>
+                    <input type="number" id="salesTotalPrice" step="0.01" required class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>ملاحظات:</label>
+                    <textarea id="salesNotes" class="input-field"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">إنشاء الفاتورة</button>
+                    <button type="button" class="btn-secondary" onclick="closeSalesInvoiceModal()">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة فاتورة الشراء -->
+    <div id="purchasesInvoiceModal" class="modal">
+        <div class="modal-overlay" onclick="closePurchasesInvoiceModal()"></div>
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h2>إنشاء فاتورة شراء</h2>
+                <button class="modal-close" onclick="closePurchasesInvoiceModal()">✕</button>
+            </div>
+            <form class="modal-form" onsubmit="savePurchasesInvoice(event)">
+                <div class="form-group">
+                    <label>اسم المورد:</label>
+                    <input type="text" id="purchasesSupplier" required class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>اختر الصنف:</label>
+                    <select id="purchasesProduct" required class="input-field">
+                        <option value="">-- اختر صنف --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>الكمية:</label>
+                    <input type="number" id="purchasesQuantity" required class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>السعر الإجمالي:</label>
+                    <input type="number" id="purchasesTotalPrice" step="0.01" required class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>ملاحظات:</label>
+                    <textarea id="purchasesNotes" class="input-field"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">إنشاء الفاتورة</button>
+                    <button type="button" class="btn-secondary" onclick="closePurchasesInvoiceModal()">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app-pro.js"></script>
+</body>
+</html>
